@@ -156,27 +156,3 @@ function insert(arr) {
   return arr
 }
 //console.log(insert([7, 1, 22, 1, 102, 0]))
- 
- 
-
-
-
-
-
-
-
-
-
-function array3(arr){
-  for (var i = 1, l = arr.length; i < l; i++) {
-      const current = arr[i];
-      var j = i;
-      while (j > 0 && arr[j - 1] > current) {
-          arr[j] = arr[j - 1];
-          j--;
-      }
-      arr[j] = current;
-  }
-  return arr;
-}
-//console.log(array3([7, 1, 22, 1, 102, 0]))
