@@ -16,14 +16,15 @@ LList.prototype.clear = function () {
     this.size = 0;
     this.root = null;
 };
+
 LList.prototype.getSize = function () {
     return this.size;
 };
+
 LList.prototype.add = function (value) {
     var newNode = new this.Node(value);
     this.size++;
     if (this.root === null) {
-        // newNode.next = this.root;
         this.root = newNode;
     } else {
         var tempNode = this.root;
@@ -33,6 +34,7 @@ LList.prototype.add = function (value) {
         tempNode.next = newNode;
     }
 };
+
 LList.prototype.set = function (value, index) {
     if (index > this.size ) {
       throw new Error("Index out bounds exception");
@@ -46,6 +48,7 @@ LList.prototype.set = function (value, index) {
         tempNode.value = value;
     } 
 };
+
 LList.prototype.get = function (index) {
     if (index > this.size) {
       throw new Error("Index out bounds exception");
@@ -60,6 +63,7 @@ LList.prototype.get = function (index) {
         count++
     }
 };
+
 LList.prototype.remove = function (value) {
     var tempNode = this.root;
     if (tempNode.value === value) {
@@ -79,6 +83,7 @@ LList.prototype.remove = function (value) {
         }
     }
 };
+
 LList.prototype.toArray = function () {
     var array = new Array(this.size);
     var index = 0;
@@ -89,6 +94,7 @@ LList.prototype.toArray = function () {
     }
     return array;
 };
+
 LList.prototype.toString = function () {
     var string = "";
     var tempNode = this.root;
@@ -102,6 +108,7 @@ LList.prototype.toString = function () {
     }
     return string;
 };
+
 LList.prototype.contains = function (value) {
     var tempNode = this.root;
     while (tempNode !== null) {
@@ -112,6 +119,7 @@ LList.prototype.contains = function (value) {
     }
     return false;
 };
+
 LList.prototype.minValue = function () {
     var tempNode = this.root;
     var minVal = tempNode.value;
@@ -123,6 +131,7 @@ LList.prototype.minValue = function () {
     }
     return minVal;
 };
+
 LList.prototype.maxValue = function () {
     var tempNode = this.root;
     var maxVal = tempNode.value;
@@ -134,35 +143,99 @@ LList.prototype.maxValue = function () {
     }
     return maxVal;
 };
+
 LList.prototype.minIndex = function () {
     var tempNode = this.root;
     var minVal = tempNode.value;
     var count = 0;
     var res;
     while (tempNode !== null) {
-        if (minVal > tempNode.value) {
-          res = count;
-          minVal = tempNode.value;
-        }
-        tempNode = tempNode.next;
-        count++;
+      if (minVal > tempNode.value) {
+        res = count;
+        minVal = tempNode.value;
+      }
+      tempNode = tempNode.next;
+      count++;
     }
     return res;
 };
+
 LList.prototype.maxIndex = function () {
     var tempNode = this.root;
     var maxVal = tempNode.value;
     var count = 0;
     var res;
     while (tempNode !== null) {
-        if (maxVal < tempNode.value) {
-          res = count;
-          maxVal = tempNode.value;
-        }
-        tempNode = tempNode.next;
-        count++;
+      if (maxVal < tempNode.value) {
+        res = count;
+        maxVal = tempNode.value;
+      }
+      tempNode = tempNode.next;
+      count++;
     }
     return res;
 };
+
+LList.prototype.reverse = function(){
+    var tempNode = this.root;
+    var prevNode = null;
+    var nextNode = null;
+
+    while(tempNode){
+        nextNode = tempNode.next;
+        tempNode.next = prevNode;
+        prevNode = tempNode;
+        tempNode = nextNode;
+    }
+    this.head = prevNode;
+};
+
+LList.prototype.retainAll = function (array) {
+    var size = this.size;
+    var tempArray = [];
+    for (var i = 0; i < size; i++) {
+      var tempNode = this.root;
+      while (tempNode !== null) {
+        if (tempNode.value !== array[i]) {
+          tempArray.push(tempNode.value);
+        }
+        tempNode = tempNode.next;
+      }
+    }
+    for (var j = 0; j < tempArray.length; j++) {
+      for (var k = 0; k < array.length; k++) {
+        if (array[k] === tempArray[j]) {
+          tempArray[j] = undefined;
+        }
+      }
+    }
+    this.removeAll(tempArray);
+};
+
+LList.prototype.removeAll = function (array) {
+    if (array.length < 1 || !Array.isArray(array)) {
+      return;
+    }
+    for (var i = 0; i < array.length; i++) {
+      if (!this.contains(array[i]) || array[i] === undefined) {
+        continue;
+      }
+      var tempNode = this.root;
+      while (tempNode !== null) {
+        if (tempNode.value === array[i]) {
+          this.remove(array[i]);
+        }
+        tempNode = tempNode.next;
+      }
+    }
+};
+
+LList.prototype.print = function () {
+    var tempNode = this.root;
+    for (var i = 0; i < this.size; i++) {
+        console.log(tempNode.value);
+        tempNode = tempNode.next;
+    }
+}
 
 module.exports = LList;
