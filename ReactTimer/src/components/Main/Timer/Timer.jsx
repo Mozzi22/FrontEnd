@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import './Timer.scss';
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import Input from '../../UI/Input';
-import Button from '../../UI/Button';
+import Input from '../../../UI/Input';
+import Button from '../../../UI/Button';
 
 class Timer extends Component {
     constructor(props) {
@@ -96,7 +96,7 @@ class Timer extends Component {
             <div className="timer">
                 <p className="timer__tablo">{time}</p>
                 <div className="timer__controll-set">
-                    <Input placeholder='Enter time for Timer in sec' onChangeInput={this.handleOnChange} value={startTime} />
+                    <Input placeholder='Enter time in sec' onChangeInput={this.handleOnChange} value={startTime} />
                     <Button onClickBtn={this.handleSetTime} title="Set" isDisabled={setBtnDisabled} />
                 </div>
                 <div className="timer__controll-operations">
