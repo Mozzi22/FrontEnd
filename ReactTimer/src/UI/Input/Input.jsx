@@ -1,24 +1,19 @@
-import React from 'react'
-import classes from './Input.css'
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 
-const Input = props => {
-  // const inputType = props.type || "text"
-  // const cls = [classes.Input]
-  // const htmlFor = `${inputType}-${Math.random()}`
-
-  return(
-    <div className={cls.join(' ')}>
-      {/* <label htmlFor={htmlFor}>{props.label}</label> */}
-      <input 
-        // type={i}
-        // id={htmlFor}
-        value={props.value}
-        onChange={props.onChange}
-        placeholder={props.placeholder}//нужно протестить 
-      />
-      <span>{props.errorMessage}</span>
-    </div>
-  )
+class Input extends Component {
+    render() {
+        const { onChangeInput, value, placeholder} = this.props;
+        return (
+            <input type="text" onChange={onChangeInput} value={value} placeholder={placeholder} />
+        )
+    }
 }
 
-export default Input
+Input.propTypes = {
+    onChangeInput: PropTypes.func,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+}
+
+export default Input;

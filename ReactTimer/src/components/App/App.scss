@@ -1,0 +1,14 @@
+.app-dark, .app-light{
+    font-family: 'Play', sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.app-light{
+    background-color: #93a8f3;
+}
+.app-dark{
+    background-color: 	#6172b1;
+}
